@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "Customer.bothNamed",
+  query = "select u from Customer u where u.firstName = ?1 and u.lastName = ?1")
 public class Customer {
 
     @Id
@@ -46,8 +49,6 @@ public class Customer {
                 "Customer[id=%d, firstName='%s', lastName='%s']",
                 id, firstName, lastName);
     }
-
-// end::sample[]
 
 	public Long getId() {
 		return id;

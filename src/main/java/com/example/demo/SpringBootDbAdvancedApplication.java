@@ -21,7 +21,6 @@ public class SpringBootDbAdvancedApplication {
         @Bean
 	public CommandLineRunner demo(CustomerRepository repository) {
 		return (args) -> {
-			// save a couple of customers
 			repository.save(new Customer("Jack", "Bauerd",true));
 			repository.save(new Customer("Chloe", "O'Brian",true));
 			repository.save(new Customer("Kim", "Bauer",true));
@@ -48,25 +47,35 @@ public class SpringBootDbAdvancedApplication {
 			// fetch customers by last name
 			log.info("Customer found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
-			repository.findByLastName("Bauer").forEach(bauer -> {
-				log.info(bauer.toString());
+			repository.findByLastName("Bauer").forEach(item -> {
+				log.info(item.toString());
 			});
 			log.info("findByFirstNameAndLastName:");
-                        repository.findByFirstNameAndLastName("Kim", "Bauer").forEach(bauer -> {
-				log.info(bauer.toString());
+                        repository.findByFirstNameAndLastName("Kim", "Bauer").forEach(item -> {
+				log.info(item.toString());
 			});
                         log.info("indByIdLessThan:");
-                        repository.findByIdLessThan(3).forEach(bauer -> {
-				log.info(bauer.toString());
+                        repository.findByIdLessThan(3).forEach(item -> {
+				log.info(item.toString());
 			});
                           log.info("findByLastNameStartingWith:");
-                        repository.findByLastNameStartingWith("B").forEach(bauer -> {
-				log.info(bauer.toString());
+                        repository.findByLastNameStartingWith("B").forEach(item -> {
+				log.info(item.toString());
 			});
                           log.info("findByLastNameContainingIgnoreCase:");
-                        repository.findByLastNameContainingIgnoreCase("d").forEach(bauer -> {
-				log.info(bauer.toString());
+                        repository.findByLastNameContainingIgnoreCase("d").forEach(item -> {
+				log.info(item.toString());
 			});
+                        
+                         log.info("findBoth:");
+                        repository.findBoth("test").forEach(i -> {
+				log.info(i.toString());
+			});
+                        
+                         log.info("bothNamed:");
+                        repository.bothNamed("test").forEach(i -> {
+				log.info(i.toString());
+			});  
                         /*
                           log.info("findTop3ByFirstNameOrderByIdDesc:");
                         repository.findTop3ByFirstNameOrderByIdDesc().forEach(bauer -> {
